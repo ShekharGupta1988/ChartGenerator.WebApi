@@ -62,7 +62,8 @@ namespace ChartGenerator.WebAPI.Controllers
             };
 
             chart.Series.Add(series);
-            string filePath ="D:" + $@"\{Guid.NewGuid().ToString()}.png";
+            string appDataFolder = Environment.GetEnvironmentVariable("APPDATA");
+            string filePath =$@"{appDataFolder}\{Guid.NewGuid().ToString()}.png";
             FileInfo fs = new FileInfo(filePath);
             if (fs.Exists)
             {
@@ -76,7 +77,11 @@ namespace ChartGenerator.WebAPI.Controllers
 
             string imageContent = $@"data:image/png;base64,{base64ImageRepresentation}";
 
-            fs.Delete();
+            if (fs.Exists)
+            {
+                fs.Delete();
+            }
+
             return Ok(imageContent);
         }
 
