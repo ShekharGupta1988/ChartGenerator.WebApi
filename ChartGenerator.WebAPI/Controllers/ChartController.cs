@@ -62,8 +62,7 @@ namespace ChartGenerator.WebAPI.Controllers
             };
 
             chart.Series.Add(series);
-
-            string filePath = Directory.GetCurrentDirectory() + $@"\temp\{Guid.NewGuid().ToString()}";
+            string filePath ="D:" + $@"\{Guid.NewGuid().ToString()}.png";
             FileInfo fs = new FileInfo(filePath);
             if (fs.Exists)
             {
