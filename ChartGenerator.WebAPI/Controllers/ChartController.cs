@@ -74,15 +74,13 @@ namespace ChartGenerator.WebAPI.Controllers
 
             Byte[] imageArray = File.ReadAllBytes(fs.FullName);
             string base64ImageRepresentation = Convert.ToBase64String(imageArray);
-
-            string imageContent = $@"data:image/png;base64,{base64ImageRepresentation}";
-
+            
             if (fs.Exists)
             {
                 fs.Delete();
             }
 
-            return Ok(imageContent);
+            return Ok(base64ImageRepresentation);
         }
 
         private SeriesChartType GetChartType(string chartType)
